@@ -20,7 +20,13 @@ struct ContentView: View {
     
     @State var roundOver = false
     
+    //For animations
+    @State private var tappedFlagIndex: Int? = nil
+    
     func flagTapped(_ number: Int) {
+        
+        tappedFlagIndex = number
+        
         if number == correctAnswer {
             scoreTitle = "Correct"
             score += 1
@@ -71,7 +77,7 @@ struct ContentView: View {
                         } label : {
                             Image(countries[number])
                                 .shadow(radius: 5)
-                        }
+                        }.scale((tappedFlagIndex ?? -1) == number ? 0.5 : 1)
                     }
                 }
                 .frame(maxWidth: .infinity)
